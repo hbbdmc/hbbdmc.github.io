@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+    <script src="demo/js/jquery.min.js"></script>
+</head>
+
+<body style="background-image: url(demo/img/bg.jpg);background-repeat: no-repeat;background-size: 100% 100%;" onclick="playMusicAndBgChange('/demo/demo/music/bgmusic.mp3')">
+    <audio autoplay="" loop="" src="/demo/demo/music/bgmusic.mp3" muted="true">
+        <!-- <source src="/demo/demo/music/bgmusic.mp3"> -->
+    </audio>
+    <!-- <embed src="/demo/demo/music/bgmusic.mp3"flashvars="autoplay=true&play=true" hidden="true" autostart="true" loop="true"  type="audio/mpeg" > -->
+</body>
+
+<script>
+    function playMusicAndBgChange(path) {
+        var audioEle = document.getElementsByTagName("audio")[0];
+        audioEle.src = path;
+        audioEle.load();
+        if (audioEle.paused) { /*如果已经暂停*/
+            audioEle.play();   //播放
+            audioEle.muted = false;
+        } else {
+            audioEle.pause();  //暂停
+        }
+        let musicMillSec = 279000;
+        var imgArr = [
+            "url(demo/img/bg2.jpg)",
+            "url(demo/img/bg3.jpg)",
+            "url(demo/img/bg4.jpg)",
+            "url(demo/img/bg5.jpg)",
+            "url(demo/img/bg6.jpg)",
+            "url(demo/img/bg7.jpg)",
+            "url(demo/img/bg8.jpg)"
+        ];
+        var i = 0;
+        setInterval(function () {
+            i++;
+            if (i > imgArr.length - 1) {
+                i = 0
+            }
+            $("body").css("background-image", imgArr[i]);
+        }, musicMillSec / (imgArr.length + 1));
+    }
+    
+    $(function () {
+        
+        // playMusic("/demo/demo/music/bgmusic.mp3");
+    });
+</script>
+
+</html>
